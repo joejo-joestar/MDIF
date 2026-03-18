@@ -55,6 +55,18 @@ After running this, your CMD prompt should have a "`(mdif)`" prefixed at the sta
 
 ---
 
+## Datasets
+
+| Dataset                                                                                          | Type               | Usage in MDIF                         |
+| :----------------------------------------------------------------------------------------------- | :----------------- | :------------------------------------ |
+| [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) | SD v1.4 + CIFAR-10 | Initial pipeline testing              |
+| [GenImage](https://genimage-dataset.github.io/)                                                  | MJ, DALL-E 3, Flux | Training the spatial/spectral streams |
+| [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main)                         | DALL-E 2 Inpainted | Training inpainting localization      |
+| [CocoGlide](https://github.com/grip-unina/TruFor)                                                | GLIDE Inpainted    | Testing boundary inconsistencies      |
+| [Raise-1k](https://loki.disi.unitn.it/RAISE/confirm.php?package=1k)                              | High-Res RAW       | Frequency domain baseline             |
+
+---
+
 ## Acknowledgments
 
 ---
