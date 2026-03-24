@@ -1,1 +1,4 @@
 paper
+data/raw/*
+*.code-workspace
+__pycache__
