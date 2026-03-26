@@ -1,0 +1,20 @@
+name: mdif
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - opencv
+  - pillow
+  - xgboost
+  - pip
+  - pip:
+      - timm
+      - --extra-index-url https://download.pytorch.org/whl/cu130
+      - torch
+      - torchvision
+
+# just run `conda env create` on this dir, and it'll pickup `environment.yml` file.

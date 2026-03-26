@@ -22,10 +22,13 @@ Then install Miniconda from [the Anaconda Website](https://docs.anaconda.com/min
 > [!NOTE]
 > All the notebooks **running locally** assumes you are using a conda environment!
 
-Then open a command prompt, and run the following. This will create and activate a `python 3.11` environment called `mdif`.
+Then open a command prompt, and run the following. This will create and activate a `python 3.11` environment called `mdif`. The [environment.yml](./environment.yml) will be used to create the environment and install all needed dependencies.
 
 ```bash
-conda create -n mdif python=3.11
+conda env create
+```
+
+```bash
 conda activate mdif
 ```
 
