@@ -9,7 +9,10 @@ dependencies:
   - scikit-learn
   - opencv
   - pillow
-  - xgboost
+  - matplotlib
+  - seaborn
+  - ipykernel
+  - ipywidgets
   - pip
   - pip:
       - timm
