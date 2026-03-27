@@ -30,8 +30,6 @@ The MDIF Framework is uh... yea... :pray:
 
 Firstly, clone this repo,
 
-Firstly, clone this repo using
-
 ```bash
 git clone https://github.com/joejo-joestar/anti-poojinator-3000.git
 ```
