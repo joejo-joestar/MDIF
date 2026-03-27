@@ -135,3 +135,11 @@ if __name__ == "__main__":
     process_dataset_with_split(
         BASE_RAW / "CocoGlide", BASE_PROC, {"real": 0, "fake": 2}, split_ratio=0.8
     )
+
+    # GenImage split
+    process_dataset_with_split(
+        BASE_RAW / "GenImage",
+        BASE_PROC,
+        {"Nature": 0, "Midjourney": 1, "glide": 1},
+        split_ratio=0.8,
+    )
