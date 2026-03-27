@@ -1,8 +1,7 @@
 """
-This module implements the core signal processing functions for the three streams of the proposed method:
+Implements the core signal processing functions for two of the three streams of the proposed method:
 - Stream B: Frequency Spectral Analysis (DCT and DFT features)
 - Stream C: Depth-RGB Discrepancy (gradient-based features and statistical descriptors)
-The functions are designed to be modular and efficient, leveraging OpenCV and NumPy for image processing tasks.
 """
 
 import cv2
@@ -11,11 +10,22 @@ from scipy.fftpack import dct
 from scipy.stats import skew, kurtosis
 
 
-def extract_spectral_features(image_rgb, k_dct=128, bins_dft=64):
+def extract_spectral_features(image_rgb, k_dct=128, bins_dft=64) -> np.ndarray:
     """
     Stream B: Frequency Spectral Analysis.
-    Returns a 192-dimensional vector (128 DCT + 64 DFT).
+
+    Extracts a combined feature vector from the input RGB image using:
+    1. Discrete Cosine Transform (DCT): Top k coefficients from the log-scaled DCT of the luminance channel.
+    2. Discrete Fourier Transform (DFT): Radially averaged power spectrum from the DFT magnitude.
+
+    :param image_rgb: Input image in RGB format (H x W x 3)
+    :param k_dct: Number of top DCT coefficients to keep
+    :param bins_dft: Number of bins for the DFT radial average
+
+    :return: 192-dimensional feature vector (128 DCT + 64 DFT).
+    :rtype: np.ndarray
     """
+
     # Convert to Luminance (Y) for frequency analysis
     image_yuv = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2YUV)
     y_channel = image_yuv[:, :, 0].astype(np.float32)
@@ -53,11 +63,22 @@ def extract_spectral_features(image_rgb, k_dct=128, bins_dft=64):
     return final_vector.astype(np.float32)
 
 
-def extract_depth_features(image_rgb, depth_map):
+def extract_depth_features(image_rgb, depth_map) -> np.ndarray:
     """
     Stream C: Depth-RGB Discrepancy.
-    Returns a 9-dimensional statistical vector.
+
+    Computes a 9-dimensional feature vector that captures the local correlation and discrepancy between the RGB image and its corresponding depth map. The features include:
+    1. Gradient Magnitude Extraction: Computes the gradient magnitude for both the RGB image (using the luminance channel) and the depth map using Sobel operators.
+    2. Local Correlation / Discrepancy: Calculates the absolute difference between the RGB and depth gradients to capture local inconsistencies.
+    3. Statistical Descriptors: Computes mean, variance, skewness, kurtosis, and percentiles (5th, 25th, 50th, 75th, 95th) of the discrepancy map to summarize the distribution of discrepancies.
+
+    :param image_rgb: Input RGB image (H x W x 3)
+    :param depth_map: Corresponding depth map (H x W)
+
+    :return: 9-dimensional statistical vector.
+    :rtype: np.ndarray
     """
+
     # Gradient Magnitude Extraction (Sobel)
     gray = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2GRAY)
     grad_rgb = np.sqrt(

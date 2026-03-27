@@ -1,5 +1,6 @@
 paper
 data/raw/*
+data/processed/*
 notebooks/*.png
 *.code-workspace
 __pycache__

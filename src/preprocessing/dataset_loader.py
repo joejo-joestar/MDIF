@@ -1,29 +1,34 @@
+"""
+MDIFDataset: A PyTorch Dataset class for loading the Multi-Domain Inconsistency Fusion (MDIF) dataset.
+
+Dataset loader for the Multi-Domain Inconsistency Fusion (MDIF) framework.
+Expects data in 'data/processed' standardized by the batch processor.
+"""
+
 import torch
 import numpy as np
 from pathlib import Path
 from PIL import Image
 from torch.utils.data import Dataset
+from torchvision.transforms import Compose
 
 
 class MDIFDataset(Dataset):
-    """
-    Dataset loader for the Multi-Domain Inconsistency Fusion (MDIF) framework.
-    Expects data in 'data/processed' standardized by the batch processor.
-    """
+    def __init__(
+        self,
+        root_dir: Path,
+        transform: Compose | None = None,
+    ):
+        """
+        Initialize the dataset.
 
-    def __init__(self, root_dir, transform=None, mask_dir=None):
+        :param Path root_dir: Path to 'data/processed/train' or 'data/processed/test'
+        :param Compose transform: torchvision transforms for the RGB image
         """
-        Args:
-            root_dir: Path to 'data/processed/train' or 'data/processed/test'
-            transform: torchvision transforms for the RGB image
-            mask_dir: Path to 'data/raw/AutoSplice/Mask' (optional, for F1-Score evaluation)
-        """
+
         self.root = Path(root_dir)
-        self.mask_dir = Path(mask_dir) if mask_dir else None
         self.transform = transform
 
-        # Collect all processed image paths
-        # Naming convention: {label}_{original_stem}.jpg
         self.image_paths = sorted(list(self.root.glob("*.jpg")))
 
         if len(self.image_paths) == 0:
@@ -34,11 +39,10 @@ class MDIFDataset(Dataset):
     def __len__(self):
         return len(self.image_paths)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx) -> dict:
         img_path = self.image_paths[idx]
 
-        # Extract label and stem from filename
-        # Example: "2_73_forged.jpg" -> label=2, stem="73_forged"
+        # Extract label and stem from filename (e.g., "2_73_forged.jpg" -> label=2, stem="73_forged")
         filename = img_path.name
         label = int(filename.split("_")[0])
         original_stem = "_".join(filename.split("_")[1:]).replace(".jpg", "")
@@ -58,24 +62,9 @@ class MDIFDataset(Dataset):
             # Fallback if .npy is missing
             features = torch.zeros(201)
 
-        # Load Mask (Optional, for Inpainting Evaluation)
-        mask = torch.zeros((1, 224, 224))
-        if label == 2 and self.mask_dir:
-            # Look for mask in AutoSplice/Mask using the original stem
-            # AutoSplice masks are often .jpg or .png
-            mask_file = self.mask_dir / f"{original_stem}.jpg"
-            if not mask_file.exists():
-                mask_file = self.mask_dir / f"{original_stem}.png"
-
-            if mask_file.exists():
-                mask_img = Image.open(mask_file).convert("L").resize((224, 224))
-                mask = torch.from_numpy(np.array(mask_img)).unsqueeze(0) / 255.0
-                mask = (mask > 0.5).float()  # Binarize
-
         return {
             "image": image,  # For Stream A (Spatial CNN)
             "features": features,  # For Stream B & C (Spectral/Depth)
             "label": label,  # 0: Real, 1: Fake, 2: Inpainted
-            "mask": mask,  # For localization metrics
             "stem": original_stem,
         }
