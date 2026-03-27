@@ -6,21 +6,40 @@
 
 ---
 
+## Architecture
+
+The MDIF Framework is uh... yea... :pray:
+
+---
+
+## Datasets Used
+
+> [!NOTE]
+> Refer to the `readme` in the `/data/` directory for how to set up the datasets!
+
+| Dataset                                                                                          | Type               |
+| :----------------------------------------------------------------------------------------------- | :----------------- |
+| [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) | SD v1.4 + CIFAR-10 |
+| [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage)     | Midjourney, glide  |
+| [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main)                         | DALL-E 2 Inpainted |
+| [CocoGlide](https://github.com/grip-unina/TruFor)                                                | GLIDE Inpainted    |
+
+---
+
 ## Getting Started
 
 Firstly, clone this repo,
-<!--
+
 Firstly, clone this repo using
 
 ```bash
-git clone https://github.com/joejo-joestar/Agentic-AI-Notebooks.git
+git clone https://github.com/joejo-joestar/anti-poojinator-3000.git
 ```
--->
 
 Then install Miniconda from [the Anaconda Website](https://docs.anaconda.com/miniconda/install).
 
 > [!NOTE]
-> All the notebooks **running locally** assumes you are using a conda environment!
+> The notebooks **running locally** assumes you are using a conda environment!
 
 Then open a command prompt, and run the following. This will create and activate a `python 3.11` environment called `mdif`. The [environment.yml](./environment.yml) will be used to create the environment and install all needed dependencies.
 
@@ -54,22 +73,10 @@ After running this, your CMD prompt should have a "`(mdif)`" prefixed at the sta
 
 ---
 
-## Architecture
-
----
-
-## Datasets
-
-| Dataset                                                                                          | Type               | Usage in MDIF                         |
-| :----------------------------------------------------------------------------------------------- | :----------------- | :------------------------------------ |
-| [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) | SD v1.4 + CIFAR-10 | Initial pipeline testing              |
-| [GenImage](https://genimage-dataset.github.io/)                                                  | MJ, DALL-E 3, Flux | Training the spatial/spectral streams |
-| [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main)                         | DALL-E 2 Inpainted | Training inpainting localization      |
-| [CocoGlide](https://github.com/grip-unina/TruFor)                                                | GLIDE Inpainted    | Testing boundary inconsistencies      |
-| [Raise-1k](https://loki.disi.unitn.it/RAISE/confirm.php?package=1k)                              | High-Res RAW       | Frequency domain baseline             |
-
----
-
 ## Acknowledgments
+
+This work is builds on and uses Intel ISL's [MiDaS](https://pytorch.org/hub/intelisl_midas_v2) and Qualcomm's [MobileNet V3 Small](https://docs.pytorch.org/vision/main/models/generated/torchvision.models.mobilenet_v3_small.html) model.
+
+The framework has been fine-tuned and trained on the [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main), [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images), [CocoGlide](https://github.com/grip-unina/TruFor), and [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage) datasets.
 
 ---
