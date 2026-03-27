@@ -7,8 +7,8 @@ For each image:
 4. Concatenate features and save as .npy.
 
 Labels:
-- 0: Real (CIFAKE REAL, AutoSplice Authentic, CocoGlide real)
-- 1: Fake (CIFAKE FAKE)
+- 0: Real (CIFAKE REAL, AutoSplice Authentic, CocoGlide real, GenImage Nature)
+- 1: Fake (CIFAKE FAKE, GenImage Midjourney/glide)
 - 2: Forged/Inpainted (AutoSplice Forged_JPEG90, CocoGlide fake)
 """
 
