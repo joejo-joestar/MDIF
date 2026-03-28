@@ -3,7 +3,7 @@ data/processed/*
 __pycache__
 weights/fusion_head_best.pth
 weights/spatial_backbone_best.pth
-
+notebooks
 paper
 
 *.code-workspace
