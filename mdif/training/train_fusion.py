@@ -15,9 +15,9 @@ from tqdm import tqdm
 import numpy as np
 import gc
 
-from models.spatial_stream import SpatialStream
-from models.fusion_classifier import MDIFFusionClassifier
-from src.preprocessing.dataset_loader import MDIFDataset
+from mdif.models.spatial_stream import SpatialStream
+from mdif.models.fusion_classifier import MDIFFusionClassifier
+from mdif.preprocessing.dataset_loader import MDIFDataset
 
 # MARK: Hyperparameters & Setup
 BATCH_SIZE = 64

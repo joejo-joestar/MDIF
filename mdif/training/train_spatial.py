@@ -14,8 +14,8 @@ from pathlib import Path
 from tqdm import tqdm
 import numpy as np
 
-from models.spatial_stream import SpatialStream
-from src.preprocessing.dataset_loader import (
+from mdif.models.spatial_stream import SpatialStream
+from mdif.preprocessing.dataset_loader import (
     MDIFDataset,
 )
 

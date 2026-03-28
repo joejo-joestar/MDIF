@@ -19,7 +19,7 @@ import random
 from typing import cast
 from pathlib import Path
 from tqdm import tqdm
-from src.preprocessing.signal_proc import (
+from mdif.preprocessing.signal_proc import (
     extract_spectral_features,
     extract_depth_features,
 )

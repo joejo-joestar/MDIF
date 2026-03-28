@@ -19,9 +19,9 @@ from torchvision import transforms
 from sklearn.metrics import confusion_matrix, roc_auc_score, classification_report
 from tqdm import tqdm
 
-from models.spatial_stream import SpatialStream
-from models.fusion_classifier import MDIFFusionClassifier
-from src.preprocessing.dataset_loader import MDIFDataset
+from mdif.models.spatial_stream import SpatialStream
+from mdif.models.fusion_classifier import MDIFFusionClassifier
+from mdif.preprocessing.dataset_loader import MDIFDataset
 
 # MARK: Setup
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")

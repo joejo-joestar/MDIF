@@ -1,0 +1,29 @@
+[build-system]
+build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.2,<4"]
+
+[project]
+name = "mdif"
+version = "0.0.1"
+dependencies = [
+  "timm>=1.0.26",
+  "torch>=2.11.0",
+  "torchvision>=0.26.0"
+]
+requires-python = ">=3.11"
+authors = [
+  {name = "Akamksha Ranil", email = "f20220140@dubai.bits-pilani.ac.in"},
+  {name = "Adithya Sunoj", email = "f20220077@dubai.bits-pilani.ac.in"},
+  {name = "Joseph Cijo", email = "f20220019@dubai.bits-pilani.ac.in"},
+]
+maintainers = [
+  {name = "Akamksha Ranil", email = "f20220140@dubai.bits-pilani.ac.in"},
+  {name = "Adithya Sunoj", email = "f20220077@dubai.bits-pilani.ac.in"},
+  {name = "Joseph Cijo", email = "f20220019@dubai.bits-pilani.ac.in"},
+]
+description = "Multi-Domain Inconsistency Framework for Image Forgery Detection"
+readme = "README.md"
+license = "MIT"
+
+[project.urls]
+Repository = "https://github.com/joejo-joestar/anti-poojinator-3000.git"
