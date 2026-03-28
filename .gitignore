@@ -1,8 +1,10 @@
-paper
 data/raw/*
 data/processed/*
-notebooks/*.png
-*.code-workspace
 __pycache__
 weights/fusion_head_best.pth
 weights/spatial_backbone_best.pth
+
+paper
+
+*.code-workspace
+.markdownlint.jsonc
