@@ -32,6 +32,7 @@ Firstly, clone this repo,
 
 ```bash
 git clone https://github.com/joejo-joestar/anti-poojinator-3000.git
+cd anti-poojinator-300
 ```
 
 Then install Miniconda from [the Anaconda Website](https://docs.anaconda.com/miniconda/install).
@@ -50,6 +51,14 @@ conda activate mdif
 ```
 
 After running this, your CMD prompt should have a "`(mdif)`" prefixed at the start.
+
+Then install the `mdif/*` directory as an [editable package](https://stackoverflow.com/questions/714063/importing-modules-from-parent-folder/50194143#50194143)
+
+```bash
+pip install -e .
+```
+
+And now you can check out the [`mdif.ipynb`](./mdif.ipynb) notebook to see how the framework works!
 
 > [!TIP]
 > To **deactivate** the environment, simply run:
