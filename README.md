@@ -15,7 +15,7 @@ The MDIF Framework is uh... yea... :pray:
 ## Datasets Used
 
 > [!NOTE]
-> Refer to the `readme` in the `/data/` directory for how to set up the datasets!
+> Refer to the [`readme`](./data/README.md) in the `data/*` directory for how to set up the datasets!
 
 | Dataset                                                                                          | Type               |
 | :----------------------------------------------------------------------------------------------- | :----------------- |
