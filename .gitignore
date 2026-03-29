@@ -1,8 +1,7 @@
 data/raw/*
 data/processed/*
 __pycache__
-weights/fusion_head_best.pth
-weights/spatial_backbone_best.pth
+# weights/*.pth
 notebooks
 paper
 
