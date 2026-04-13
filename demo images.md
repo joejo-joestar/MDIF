@@ -35,3 +35,13 @@ sample/inpainted_sunoj.jpg
 ```
 
 ---
+
+## Inpainted
+
+```bash
+data\raw\CoCoGlide\real\zebra_25139.png
+```
+
+```bash
+data\raw\CoCoGlide\fake\glide_inpainting_val2017_25139_up.png
+```
