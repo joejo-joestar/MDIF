@@ -10,6 +10,45 @@
 
 The MDIF Framework is uh... yea... :pray:
 
+```mermaid
+flowchart LR
+    A[Image Input]
+
+    subgraph Stream-A [Stream A]
+        B[MobileNetV3-Small] --> C[576D Spatial<br>Feature Vector]
+    end
+
+    subgraph Stream-B [Stream B]
+        D[Signal Processing<br>using DCT + DFT] --> E[192D Spectral<br>Feature Vector]
+    end
+
+    subgraph Stream-C [Stream C]
+        F[Extract Depth Features<br>using Sobel Operator] --> G[Train MiDaS 3.0] --> H[9D Depth<br>Feature Vector]
+    end
+
+    A --> B
+    A --> D
+    A --> F
+
+    C --> I[777D Concatenated<br>Vector]
+    E --> I
+    H --> I
+
+    I --> J[3 Layer MLP]
+
+    J --> Classes
+
+    subgraph Classes
+        K[Authentic<br>Photograph]
+        L[Fully<br>AI-Generated]
+        M[Partially<br>AI-Inpainted]
+    end
+
+    style Stream-A fill:#e1f5fe,stroke:#03a9f4,stroke-width:2px,color:#000
+    style Stream-B fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#000
+    style Stream-C fill:#fff3e0,stroke:#ff9800,stroke-width:2px,color:#000
+```
+
 ---
 
 ## Datasets Used

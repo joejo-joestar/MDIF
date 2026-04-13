@@ -74,7 +74,6 @@ def extract_depth_features(image_rgb, depth_map) -> np.ndarray:
 
     :param image_rgb: Input RGB image (H x W x 3)
     :param depth_map: Corresponding depth map (H x W)
-
     :return: 9-dimensional statistical vector.
     :rtype: np.ndarray
     """
