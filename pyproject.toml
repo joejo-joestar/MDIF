@@ -12,14 +12,14 @@ dependencies = [
 ]
 requires-python = ">=3.11"
 authors = [
-  {name = "Akamksha Ranil", email = "f20220140@dubai.bits-pilani.ac.in"},
-  {name = "Adithya Sunoj", email = "f20220077@dubai.bits-pilani.ac.in"},
   {name = "Joseph Cijo", email = "f20220019@dubai.bits-pilani.ac.in"},
+  {name = "Adithya Sunoj", email = "f20220077@dubai.bits-pilani.ac.in"},
+  {name = "Akamksha Ranil", email = "f20220140@dubai.bits-pilani.ac.in"},
 ]
 maintainers = [
-  {name = "Akamksha Ranil", email = "f20220140@dubai.bits-pilani.ac.in"},
-  {name = "Adithya Sunoj", email = "f20220077@dubai.bits-pilani.ac.in"},
   {name = "Joseph Cijo", email = "f20220019@dubai.bits-pilani.ac.in"},
+  {name = "Adithya Sunoj", email = "f20220077@dubai.bits-pilani.ac.in"},
+  {name = "Akamksha Ranil", email = "f20220140@dubai.bits-pilani.ac.in"},
 ]
 description = "Multi-Domain Inconsistency Framework for Image Forgery Detection"
 readme = "README.md"

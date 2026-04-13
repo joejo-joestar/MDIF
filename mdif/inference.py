@@ -12,6 +12,7 @@ This script allows users to input an image path and receive a prediction on whet
 import torch
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 from pathlib import Path
 from typing import cast
 from torchvision import transforms
@@ -49,37 +50,60 @@ fusion_model.to(DEVICE)
 fusion_model.eval()
 
 
-def analyze_image(img_path):
-    p = Path(img_path)
-    if not p.exists():
-        return "File not found."
+def _display_resized_image(img_res):
+    """Display the resized (224x224) RGB image used for inference."""
+    plt.figure(figsize=(4, 4))
+    plt.imshow(img_res)
+    plt.title("Resized Input (224x224)")
+    plt.axis("off")
+    plt.tight_layout()
+    plt.show()
 
-    # 1. Image Preprocessing
-    img_bgr = cv2.imread(str(p))
+
+def analyze_image(img_path, show_resized=False):
+    image = Path(img_path)
+    if not image.exists():
+        return "File not found.", 0.0, {}
+
+    print(f"Predicting for: {image.name}")
+
+    # region Image Preprocessing
+    img_bgr = cv2.imread(str(image))
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     img_res = cv2.resize(img_rgb, (224, 224))
+    if show_resized:
+        _display_resized_image(img_res)
+    # endregion
 
-    # 2. Extract Math Features (201-dim)
-    # Spectral (Includes the np.log1p scaling from signal_proc.py)
+    # region Extract Math Features (201-dim)
+    # Spectral (Stream B)
     spec_feat = extract_spectral_features(img_res)
 
     # Depth (Stream C)
     img_t = (
-        torch.from_numpy(img_res).permute(2, 0, 1).float().unsqueeze(0).to(DEVICE)
+        torch.from_numpy(img_res)
+        .permute(2, 0, 1)
+        .float()
+        .unsqueeze(0)
+        .to(DEVICE)
         / 255.0
     )
     with torch.no_grad():
         depth = midas(img_t).squeeze().cpu().numpy()
     depth_feat = extract_depth_features(img_res, depth)
 
+    # Concatenate features (192 from spectral + 9 from depth = 201 total)
+    feat_vector = np.concatenate([spec_feat, depth_feat])
+
     math_vector = (
-        torch.from_numpy(np.concatenate([spec_feat, depth_feat]))
+        torch.from_numpy(feat_vector)
         .float()
         .unsqueeze(0)
         .to(DEVICE)
     )
+    # endregion
 
-    # 3. Extract Spatial Features (576-dim)
+    # region Extract Spatial Features (576-dim)
     data_transform = transforms.Compose(
         [
             transforms.ToTensor(),
@@ -97,25 +121,30 @@ def analyze_image(img_path):
 
     with torch.no_grad():
         spatial_feat = spatial_model(img_tensor, return_features=True)
+    # endregion
 
-    # 4. MDIF Fusion Decision
+    # region MDIF Fusion Decision
     with torch.no_grad():
         mdif_vector = torch.cat((spatial_feat, math_vector), dim=1)
         output = fusion_model(mdif_vector)
         probs = torch.softmax(output, dim=1)
         conf, pred = torch.max(probs, 1)
+    # endregion
 
     classes = {
         0: "Authentic Photograph",
         1: "Fully AI-Generated",
         2: "Partially AI-Inpainted",
     }
+    class_probabilities = {
+        classes[i]: float(probs[0, i].item())
+        for i in sorted(classes)
+    }
     # Explicitly cast pred.item() to int
     predicted_class_id = int(pred.item())
-    return classes[predicted_class_id], float(conf.item())
+    return classes[predicted_class_id], float(conf.item()), class_probabilities
 
-
-if __name__ == "__main__":
+def infer():
     print("--- MDIF Image Forgery Detector ---")
     while True:
         user_input = input("\nEnter image path (or 'exit'): ")
@@ -123,8 +152,19 @@ if __name__ == "__main__":
             break
 
         try:
-            label, confidence = analyze_image(user_input)
+            print("\n")
+            label, confidence, class_probabilities = analyze_image(
+                user_input,
+                show_resized=True,
+            )
             print(f"\nResult: {label}")
             print(f"Confidence: {confidence * 100:.2f}%")
+            print("\nScores:")
+            for class_name, probability in class_probabilities.items():
+                print(f"- {class_name}: {probability * 100:.2f}%")
         except Exception as e:
             print(f"Error: {e}")
+
+
+if __name__ == "__main__":
+    infer()
