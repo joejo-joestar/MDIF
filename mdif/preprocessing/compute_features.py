@@ -26,7 +26,7 @@ from mdif.preprocessing.signal_proc import (
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 midas = (
-    cast(torch.nn.Module, torch.hub.load("intel-isl/MiDaS", "MiDaS_small"))
+    cast(torch.nn.Module, torch.hub.load("intel-isl/MiDaS", "MiDaS_small", trust_repo=True)) # type: ignore
     .to(device)
     .eval()
 )
