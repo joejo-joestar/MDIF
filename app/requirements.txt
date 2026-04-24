@@ -5,6 +5,8 @@ scipy
 scikit-learn
 opencv-python-headless
 pillow
+matplotlib
+seaborn
 timm
 torch
 torchvision
