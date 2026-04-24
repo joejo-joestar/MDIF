@@ -37,13 +37,14 @@ FUSION_WEIGHTS = WEIGHTS_DIR / "fusion_head_best.pth"
 
 def load_models():
     """Load all three models. Call once and cache the result (e.g. with st.cache_resource)."""
+    torch.hub.set_dir(str(PROJECT_ROOT / "hub_cache"))
     midas = (
         cast(torch.nn.Module, torch.hub.load("intel-isl/MiDaS", "MiDaS_small", trust_repo=True)) # type: ignore
         .to(DEVICE)
         .eval()
     )
 
-    spatial_model = SpatialStream(num_classes=3)
+    spatial_model = SpatialStream(num_classes=3, pretrained=False)
     spatial_model.load_state_dict(torch.load(SPATIAL_WEIGHTS, map_location=DEVICE))
     spatial_model.to(DEVICE)
     spatial_model.eval()

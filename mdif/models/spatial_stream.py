@@ -21,10 +21,11 @@ class SpatialStream(nn.Module):
     During fusion training, we will use the feature extractor part and freeze its weights.
     """
 
-    def __init__(self, num_classes=3):
+    def __init__(self, num_classes=3, pretrained=True):
         super(SpatialStream, self).__init__()
-        # Load pre-trained MobileNetV3-Small
-        self.backbone = models.mobilenet_v3_small(weights="IMAGENET1K_V1")
+        self.backbone = models.mobilenet_v3_small(
+            weights="IMAGENET1K_V1" if pretrained else None
+        )
 
         # Removing the final head to use it as a feature extractor
         self.feature_extractor = self.backbone.avgpool
