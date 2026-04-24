@@ -1,5 +1,10 @@
 streamlit
 streamlit-extras
+numpy
+scipy
+scikit-learn
+opencv
+pillow
 timm
 torch
 torchvision
