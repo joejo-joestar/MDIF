@@ -24,6 +24,7 @@ Download and extract the datasets from the following sources:
 | Unbiased Tiny GenImage | [Kaggle](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage)                     | We only use the `Nature/*` (_real_), `Midjourney/*` (_fake_), and `glide/*` (_fake_) for training and testing |
 | AutoSplice             | [Github](https://github.com/shanface33/AutoSplice_Dataset/tree/main)                             | We only use the `Authentic/*` (_real_) and `Forged_JPEG90/*` (_inpainted_) for training and testing           |
 | CocoGlide              | [Github](https://github.com/grip-unina/TruFor)                                                   | This dataset contains `real/*` (_real_) and `fake/*` (_inpainted_) for training and testing                   |
+| SAGI                   | [Kaggle](https://www.kaggle.com/datasets/giakop/sagi-d/data)                                     | This dataset contains `real/*` (_real_) and `fake/*` (_inpainted_) for training and testing                   |
 
 > [!NOTE]
 > The `CIFAKE` dataset, by default, comes split as `train/*` and `test/*` datasets but the others do not.

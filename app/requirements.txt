@@ -1,0 +1,6 @@
+streamlit
+streamlit-extras
+timm
+torch
+torchvision
+git+https://github.com/joejo-joestar/MDIF.git

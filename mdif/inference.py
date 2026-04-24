@@ -14,7 +14,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
-from typing import cast
+from typing import Union, cast
 from torchvision import transforms
 from PIL import Image
 
@@ -35,19 +35,23 @@ SPATIAL_WEIGHTS = WEIGHTS_DIR / "spatial_backbone_best.pth"
 FUSION_WEIGHTS = WEIGHTS_DIR / "fusion_head_best.pth"
 
 
-midas = cast(torch.nn.Module, torch.hub.load("intel-isl/MiDaS", "MiDaS_small"))
-midas.to(DEVICE)
-midas.eval()
+def load_models():
+    """Load all three models. Call once and cache the result (e.g. with st.cache_resource)."""
+    midas = cast(torch.nn.Module, torch.hub.load("intel-isl/MiDaS", "MiDaS_small"))
+    midas.to(DEVICE)
+    midas.eval()
 
-spatial_model = SpatialStream(num_classes=3)
-spatial_model.load_state_dict(torch.load(SPATIAL_WEIGHTS, map_location=DEVICE))
-spatial_model.to(DEVICE)
-spatial_model.eval()
+    spatial_model = SpatialStream(num_classes=3)
+    spatial_model.load_state_dict(torch.load(SPATIAL_WEIGHTS, map_location=DEVICE))
+    spatial_model.to(DEVICE)
+    spatial_model.eval()
 
-fusion_model = MDIFFusionClassifier(input_dim=777)
-fusion_model.load_state_dict(torch.load(FUSION_WEIGHTS, map_location=DEVICE))
-fusion_model.to(DEVICE)
-fusion_model.eval()
+    fusion_model = MDIFFusionClassifier(input_dim=777)
+    fusion_model.load_state_dict(torch.load(FUSION_WEIGHTS, map_location=DEVICE))
+    fusion_model.to(DEVICE)
+    fusion_model.eval()
+
+    return midas, spatial_model, fusion_model
 
 
 def _display_resized_image(img_res):
@@ -60,16 +64,37 @@ def _display_resized_image(img_res):
     plt.show()
 
 
-def analyze_image(img_path, show_resized=False):
-    image = Path(img_path)
-    if not image.exists():
-        return "File not found.", 0.0, {}
+def analyze_image(
+    img_source: Union[str, Path, Image.Image],
+    models: tuple | None = None,
+    show_resized: bool = False,
+):
+    """
+    Analyze an image for forgery.
 
-    print(f"Predicting for: {image.name}")
+    Args:
+        img_source: A file path (str/Path) or a PIL Image (e.g. from st.file_uploader).
+        models: Optional tuple of (midas, spatial_model, fusion_model). If None, models
+                are loaded fresh — pass pre-loaded models to avoid reloading on every call.
+        show_resized: If True, display the 224x224 resized image (CLI use only).
+    """
+    if models is not None:
+        midas, spatial_model, fusion_model = models
+    else:
+        midas, spatial_model, fusion_model = load_models()
 
     # region Image Preprocessing
-    img_bgr = cv2.imread(str(image))
-    img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    if isinstance(img_source, Image.Image):
+        pil_img = img_source.convert("RGB")
+        img_rgb = np.array(pil_img)
+    else:
+        image = Path(img_source)
+        if not image.exists():
+            return "File not found.", 0.0, {}
+        print(f"Predicting for: {image.name}")
+        img_bgr = cv2.imread(str(image))
+        img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
     img_res = cv2.resize(img_rgb, (224, 224))
     if show_resized:
         _display_resized_image(img_res)

@@ -13,6 +13,8 @@ dependencies:
   - seaborn
   - ipykernel
   - ipywidgets
+  - streamlit
+  - streamlit-extras
   - pip
   - pip:
       - timm
