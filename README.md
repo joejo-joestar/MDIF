@@ -56,12 +56,13 @@ flowchart LR
 > [!NOTE]
 > Refer to the [`readme`](./data/README.md) in the `data/*` directory for how to set up the datasets!
 
-| Dataset                                                                                          | Type               |
-| :----------------------------------------------------------------------------------------------- | :----------------- |
-| [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) | SD v1.4 + CIFAR-10 |
-| [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage)     | Midjourney, glide  |
-| [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main)                         | DALL-E 2 Inpainted |
-| [CocoGlide](https://github.com/grip-unina/TruFor)                                                | GLIDE Inpainted    |
+| Dataset                                                                                          | Type             |
+| :----------------------------------------------------------------------------------------------- | :--------------- |
+| [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) | Generated Images |
+| [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage)     | Generated Images |
+| [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main)                         | Inpainted Images |
+| [CocoGlide](https://github.com/grip-unina/TruFor)                                                | Inpainted Images |
+| [SAGI](https://www.kaggle.com/datasets/giakop/sagi-d/data)                                       | Inpainted Images |
 
 ---
 
@@ -131,6 +132,9 @@ This work is builds on and uses Intel ISL's [MiDaS](https://pytorch.org/hub/inte
 The framework has been fine-tuned and trained on the [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main), [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images), [CocoGlide](https://github.com/grip-unina/TruFor), and [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage) datasets.
 
 The sample images [`sample/real_flower2`](sample/real_flower2.jpg) and [`sample/real_cat`](sample/real_cat.jpg) are Photos by [joejo joestar](https://unsplash.com/@joejojoestar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/3qg-RiNOnHQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) and the [`sample/gen_nanoban_flower`](sample/gen_nanoban_flower.jpg) and [`sample/gen_nanoban_cat`](sample/gen_nanoban_cat.jpg) are generated using [Google's Nano Banana (Gemini 2.5 Flash Image)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image)
+
+>[!NOTE]
+> This repo also includes the [`isl-org/MIDAS`](https://github.com/isl-org/MIDAS) repository to help speed up the deployed streamlit app!
 
 ---
 
