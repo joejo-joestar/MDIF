@@ -10,10 +10,10 @@ from mdif.inference import load_models, analyze_image
 
 st.set_page_config(page_title="MDIF", page_icon=":guardsman:", layout="wide")
 
-st.title("MDIF: Multi-Domain Inconsistency Framework")
-st.caption("A Multi-Domain Inconsistency Framework proposed for our Image Processing course (CS F311).")
+st.title(":primary[MDIF]", text_alignment="center")
+st.caption("A Multi-Domain Inconsistency Framework proposed for our Image Processing course (CS F311).", text_alignment="center")
 
-@st.cache_resource(show_spinner="Loading models", show_time=True)
+@st.cache_resource(show_spinner="Loading models...", show_time=True)
 def get_models():
     return load_models()
 
