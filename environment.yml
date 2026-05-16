@@ -1,12 +1,12 @@
 name: mdif
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - python=3.11
   - numpy
   - scipy
   - scikit-learn
-  - opencv-python-headless
   - pillow
   - matplotlib
   - seaborn
@@ -16,9 +16,10 @@ dependencies:
   - streamlit-extras
   - pip
   - pip:
-      - timm
-      - --extra-index-url https://download.pytorch.org/whl/cu130
-      - torch
-      - torchvision
+    - timm
+    - opencv-python-headless
+    - --extra-index-url https://download.pytorch.org/whl/cu130
+    - torch
+    - torchvision
 
 # just run `conda env create` on this dir, and it'll pickup `environment.yml` file.

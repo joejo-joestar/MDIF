@@ -16,7 +16,8 @@ import seaborn as sns
 from pathlib import Path
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from sklearn.metrics import confusion_matrix, roc_auc_score, classification_report
+from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, classification_report
+from sklearn.preprocessing import label_binarize
 from tqdm import tqdm
 
 from mdif.models.spatial_stream import SpatialStream
@@ -100,12 +101,30 @@ def evaluate():
         annot=True,
         fmt="d",
         cmap="Blues",
-        xticklabels=["Auth", "Gen", "Inp"],
-        yticklabels=["Auth", "Gen", "Inp"],
+        xticklabels=["Authentic", "Generated", "Inpainted"],
+        yticklabels=["Authentic", "Generated", "Inpainted"],
     )
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
+    plt.xlabel("Predicted", size=12)
+    plt.ylabel("Actual", size=12)
     plt.title("MDIF Framework Confusion Matrix")
+    plt.show()
+
+    class_names = ["Authentic", "Generated", "Inpainted"]
+    all_probs_arr = np.array(all_probs)
+    all_labels_bin = np.array(label_binarize(all_labels, classes=[0, 1, 2]))
+
+    plt.figure(figsize=(8, 6))
+    for i, name in enumerate(class_names):
+        fpr, tpr, _ = roc_curve(all_labels_bin[:, i], all_probs_arr[:, i])
+        class_auc = roc_auc_score(all_labels_bin[:, i], all_probs_arr[:, i])
+        plt.plot(fpr, tpr, label=f"{name} (AUC = {class_auc:.3f})")
+
+    plt.plot([0, 1], [0, 1], "k--", label="Chance")
+    plt.xlabel("False Positive Rate", size=12)
+    plt.ylabel("True Positive Rate", size=12)
+    plt.title("MDIF Framework ROC Curves")
+    plt.legend(loc="lower right")
+    plt.tight_layout()
     plt.show()
 
 
