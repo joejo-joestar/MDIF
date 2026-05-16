@@ -16,7 +16,7 @@ import seaborn as sns
 from pathlib import Path
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, classification_report
+from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve, classification_report, precision_recall_curve, average_precision_score
 from sklearn.preprocessing import label_binarize
 from tqdm import tqdm
 
@@ -104,8 +104,8 @@ def evaluate():
         xticklabels=["Authentic", "Generated", "Inpainted"],
         yticklabels=["Authentic", "Generated", "Inpainted"],
     )
-    plt.xlabel("Predicted", size=12)
-    plt.ylabel("Actual", size=12)
+    plt.xlabel("Predicted", size=14)
+    plt.ylabel("Actual", size=14)
     plt.title("MDIF Framework Confusion Matrix")
     plt.show()
 
@@ -119,10 +119,32 @@ def evaluate():
         class_auc = roc_auc_score(all_labels_bin[:, i], all_probs_arr[:, i])
         plt.plot(fpr, tpr, label=f"{name} (AUC = {class_auc:.3f})")
 
-    plt.plot([0, 1], [0, 1], "k--", label="Chance")
+    # plt.plot([0, 1], [0, 1], "k--", label="Chance")
     plt.xlabel("False Positive Rate", size=12)
     plt.ylabel("True Positive Rate", size=12)
     plt.title("MDIF Framework ROC Curves")
+    plt.legend(loc="lower right")
+    plt.tight_layout()
+    plt.show()
+
+    plt.figure(figsize=(8, 6))
+    f1_values = [0.2, 0.4, 0.6, 0.8]
+    for f1 in f1_values:
+        r = np.linspace(0.01, 1.0, 500)
+        p = f1 * r / (2 * r - f1)
+        valid = (p > 0) & (p <= 1.0)
+        plt.plot(r[valid], p[valid], color="gray", linestyle="--", linewidth=0.8, alpha=0.5)
+        idx = np.argmin(np.abs(r[valid] - p[valid]))
+        plt.annotate(f"F1={f1}", xy=(r[valid][idx], p[valid][idx]), fontsize=7, color="gray", ha="center")
+
+    for i, name in enumerate(class_names):
+        precision, recall, _ = precision_recall_curve(all_labels_bin[:, i], all_probs_arr[:, i])
+        ap = average_precision_score(all_labels_bin[:, i], all_probs_arr[:, i])
+        plt.plot(recall, precision, label=f"{name} (AP = {ap:.3f})")
+
+    plt.xlabel("Recall", size=12)
+    plt.ylabel("Precision", size=12)
+    plt.title("MDIF Framework Precision-Recall Curves")
     plt.legend(loc="lower right")
     plt.tight_layout()
     plt.show()
