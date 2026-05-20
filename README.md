@@ -6,6 +6,12 @@
 
 ---
 
+## Paper
+
+The paper describing the MDIF framework is available [here](./paper/paper.pdf).
+
+---
+
 ## Architecture
 
 The MDIF Framework is uh... yea... :pray:
