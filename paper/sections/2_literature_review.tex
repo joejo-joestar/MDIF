@@ -1,0 +1,100 @@
+% Summarize the research papers 12 to 15 journal papers from recent 3 years.
+% Ensure the impact factor of the journal is more than 3. Write the gaps in the
+% literature.
+
+% =========================================================================== %
+Modern day misinformation need not be only altered images. It can also be the
+captions attached to unaltered image. \citet{sagar2026factfake} aims to verify
+the efficacy of the use of IMD techniques in the context of “Multimodal
+Misinformation”. This is achieved in a two-stage process starting with a MCTS
+multimodal LLM supported by web search and similar RAG tools, and multiple
+rounds of “Multi-Agent Debate” between a sceptic agent and a supporter agent.
+This new architecture is tested against five IMD techniques, namely, NPR
+\cite{tan2023npr}, BNext-M \cite{romeo2024bnextm}, GRAMNet
+\cite{liu2020gramnet}, ProDet \cite{cheng2024prodet}, and
+FatFormer \cite{liu2023fatformer}.
+These are then benchmarked on the MMFakeBench and the DGM4 datasets.
+
+In \citet{sun2025forgerysleuth}, the authors address limitations of using
+multimodal large language models (M-LLMs) to perform image
+manipulation detection (IMD) tasks by proposing “ForgerySleuth”, a
+tool that aims to provide a much-detailed explanation of detected
+clues and segments the regions that have been tampered. They have
+also constructed a more diverse dataset, aptly titled
+“ForgeryAnalysis Dataset” from existing datasets including CASIA
+\cite{dong2013casia}, AutoSplice \cite{jia2023autosplice},
+DEFACTO \cite{mahfoudi2019defacto}, and MIML \cite{qu2024miml}.
+
+While the field of image synthesis with the use of artificial
+intelligence has been rapidly evolving thanks to the diffusion-based
+generative models, identification of such content becomes crucial in
+image forensics. To address the increased existence of GAN produced
+images, \citet{tran2025diffcor} propose DiffCoR. This detection
+method uses Stable Diffusion Processing (SDP) module, which uses a
+pre-trained model to reconstruct images using reverse diffusion and
+Image Representation Learning (IRL) that applies Self-Supervised
+Learning (SSL) with Latency Consistency Loss (LCL). Additionally,
+Discrete Fourier Transform (DFT) allows a frequency domain analysis
+for enhancing the detection of any manipulation. The dataset
+introduced for this research is “ForensicsImage”, which constitutes
+of both real and AI generated images from LSUN-Bedroom, CelebA-HQ and
+CelebDFv2, among other diffusion models like LDM
+\cite{rombach2022ldm}, DALL-E  \cite{ramesh2022dalle}, Imagen
+\cite{saharia2022imagen}, and Midjourney.
+
+In contrast to the deep learning framework, DiffCoR suggests,
+\citet{bammey2024synthbuster} brings forward the idea of a
+computationally lean, interpretable detector optimized for
+photorealistic diffusion outputs from models like Stable Diffusion
+1.3-XL \cite{rombach2022ldm}, Midjourney v5, DALL·E 2/3
+\cite{ramesh2022dalle}, Glide, and Adobe Firefly, using a
+cross-difference high-pass filter to highlight frequency artifacts at
+periods 2, 4, and 8 in the Fourier transform of a residual image,
+allowing a clear distinction of a real image from a fake one. In
+addition, it extracts 135 peak magnitudes per image as features for a
+lightweight HBGB classifier and handles JPEG compression through
+per-quality-factor models. The research used a self-constructed
+dataset from which the synthetic images were generated from text
+prompts, while the real images were borrowed from the Raise-1k
+dataset, a subset of the Raise \cite{dang-nguyen2015raise}
+dataset. The architecture brings a good generalization to the table
+but focuses only on diffusion models.
+
+While methods such as those proposed by \citet{bammey2024synthbuster}
+work effectively on high-frequency artifacts, these details are at
+risk of being lost during post-processing like image compression. For
+detection to work even after such alterations and to expand detection
+beyond just diffusion models, \citet{manisha2025camera} propose an
+approach based on source camera fingerprinting. Fingerprints
+(artifacts and other information) left on photographs by physical
+cameras and AI models are very different; by focusing on
+mid-frequency details, this difference can be discerned, even after
+compression. Since each AI model will have its unique fingerprint,
+this methodology also makes it possible to identify the exact model
+that has generated an image. A ResNet101 model is trained on QUFVD
+images resized to 224x224 pixels. The resizing strips high frequency
+data and forces the model to learn mid-frequency fingerprints. The
+trained ResNet101 outputs a 2048-dimensional fingerprint, which is
+then fed into the SVM, for a set of real (FFHQ) and fake (DH3)
+images, to build the classification model. On the DF3 and CNN-aug
+datasets, the model has an average AUC of 0.994 and showcases high
+resilience to image alterations. However, the reliance on
+fingerprints compromises the accuracy of the model when there are
+localized image changes such as face blending.
+
+Building upon the need to capture localized artifacts that methods
+like \citet{manisha2025camera} struggle with while still making use of
+frequency-domain analysis, \citet{yan2026dff} propose a Dual Frequency Branch
+Framework combined with Reconstructed Sliding Windows Attention
+(RSWAttention). Unlike earlier single-frequency approaches that could
+lose data during compression or resizing, this architecture extracts
+many perspective features by fusing the Discrete Wavelet Transform
+(DWT) for local high-frequency and low-frequency textures, with the
+phase component of the Fast Fourier Transform (FFT). To isolate and
+find subtle tampering, RSWAttention restricts feature extraction to
+the local window, which forces the model to evaluate how the
+neighboring pixels are interdependent. It was evaluated against 65
+distinct GAN and diffusion models, and showed good generalization,
+better than baselines such as FatFormer by \citet{liu2023fatformer}. Despite the
+local attention mechanism, the framework has vulnerabilities with source
+fingerprinting while detecting highly localized face-swapping alterations.

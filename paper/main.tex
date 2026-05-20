@@ -1,0 +1,127 @@
+\documentclass[journal,a4paper]{IEEEtran}
+% \documentclass[conference]{IEEEtran}
+
+% \usepackage{cite}
+
+% https://merkel.texture.rocks/Various/Latex/natbib.php
+\usepackage[square,numbers,sort&compress]{natbib}
+% https://tex.stackexchange.com/questions/201582/natbib-ieeetran-and-alphanumeric-citation-is-there-an-ieeetransan-style-availa
+\bibliographystyle{IEEEtranN}
+
+\usepackage{import}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{float,tabularx,booktabs}
+\usepackage{array}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor, soul}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+
+\hypersetup{ colorlinks=true, filecolor=blue, urlcolor=cyan, pdftitle={Using
+    Pattern Recognition to Identify Intrinsically Disordered Regions in Human
+Transcription Factors} }
+\def\BibTeX{{ \rm
+    B\kern-.05em{\sc i\kern-.025em b}\kern-.08emT
+\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX }}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\newcommand{\highlight}[2]{\sethlcolor{#1}\hl{#2}}
+
+% =========================================================================== %
+% ---------- Header ----------
+
+\begin{document}
+
+\title{Multi-Domain Inconsistency Framework for Image Forgery Detection\\
+  % {\footnotesize A nonsense way to try and make sense of this data}
+}
+
+\author{
+  {\IEEEauthorblockN{Joseph Cijo}\\
+    \IEEEauthorblockA{ \textit{Dept. of Computer Science}\\
+      \textit{Birla Institute of Technology and Science, Dubai}\\
+      Dubai, UAE\\
+      \href{mailto:f20220019@dubai.bits-pilani.ac.in}{f20220019@dubai.bits-pilani.ac.in}
+  }}
+  \and\\
+  {\IEEEauthorblockN{Adithya Sunoj}\\
+    \IEEEauthorblockA{ \textit{Dept. of Computer Science}\\
+      \textit{Birla Institute of Technology and Science, Dubai}\\
+      Dubai, UAE\\
+      \href{mailto:f20220077@dubai.bits-pilani.ac.in}{f20220077@dubai.bits-pilani.ac.in}
+  }}
+  \and\\
+  {\IEEEauthorblockN{Akamksha Ranil}\\
+    \IEEEauthorblockA{ \textit{Dept. of Computer Science}\\
+      \textit{Birla Institute of Technology and Science, Dubai}\\
+      Dubai, UAE\\
+      \href{mailto:f20220140@dubai.bits-pilani.ac.in}{f20220140@dubai.bits-pilani.ac.in}
+  }}
+}
+\maketitle
+
+% =========================================================================== %
+% ---------- Prelude ----------
+
+\import{sections/}{0_prelude.tex}
+
+% =========================================================================== %
+% ---------- Sections ----------
+
+% --- Introduction
+\section{Introduction} \label{section:introduction}
+
+\import{sections/}{1_introduction.tex}
+
+% --- Literature Review
+\section{Literature Review} \label{section:related_works}
+
+\import{sections/}{2_literature_review.tex}
+
+% --- Dataset Description
+\section{Dataset Description} \label{section:datasets}
+
+This section describes the datasets used in this project, including
+their sources, characteristics, and how they are combined to train
+the models in the proposed framework.
+
+\import{sections/}{3_dataset_description.tex}
+
+% --- Methodology
+\section{Methodology} \label{section:methodology}
+
+\import{sections/}{4_methodology.tex}
+
+% --- Implementation Details
+\section{Implementation Details} \label{section:implementation}
+
+\import{sections/}{5_implementation_details.tex}
+
+% --- Results and Discussions
+\section{Results and Discussions} \label{section:results}
+
+\import{sections/}{6_results_and_discussions.tex}
+
+% --- Conclusion and Future Work
+\section{Conclusion} \label{section:conclusion}
+
+\import{sections/}{7_conclusion_and_future_work.tex}
+
+% --- Code Availability
+
+\section{Code Availability} \label{section:code_availability}
+
+The code used to generate the results in this paper is available at
+\url{https://github.com/joejo-joestar/MDIF} and a live demo of the framework can
+be accessed at \url{https://mdif-app.streamlit.app}.
+
+% =========================================================================== %
+% ---------- Footer ----------
+
+% --- References \bibliographystyle{ABBRV}
+\bibliography{library}
+
+\end{document}

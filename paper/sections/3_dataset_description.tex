@@ -1,0 +1,99 @@
+% Mention all the datasets used in the project and describe it
+
+% =========================================================================== %
+% --- Dataset Creation ---
+
+\subsection{Raw Datasets} \label{subsection:raw}
+
+Table \ref{table:dataset_characteristics} describes some relevant statistics of
+the combined datasets used to train the models in the proposed framework. The
+dataset contains images which pertain to three categories: authentic images,
+fully AI-generated images and AI-manipulated (inpainted) images, all collected
+from multiple publicly available benchmark datasets.
+
+\input{tables/dataset_characteristics.tex}
+
+\subsubsection{CIFAKE}
+The CIFAKE dataset \cite{bird2023cifake} constitutes two classes:
+\begin{itemize}
+  \item{REAL - the authentic photographs}
+  \item{FAKE - AI-generated synthetic images}
+\end{itemize}
+The primary use of this dataset was to improve the mode's ability to
+differentiate between images which are real from images which are entirely
+synthetic. CIFAKE produces strong images from  global image synthesis artifacts
+produced by GAN and diffusion-based generators.
+
+\subsubsection{Unbiased Tiny GenImage}
+From the GenImage dataset \cite{zhu2023genimage}, the following subsets were
+used:
+\begin{itemize}
+  \item{Nature - authentic images}
+  \item{Midjourney - AI-generated images}
+  \item{Glide - AI-generated images}
+\end{itemize}
+The purpose of this dataset was primarily to improve cross-generator
+generalization. Since the generated images were from different diffusion
+architecture origins, the model was able to learn the spectral and spatial
+inconsistencies from the images rather than memorizing artifacts from a single
+model.
+
+\subsubsection{AutoSplice}
+The AutoSplice dataset \cite{jia2023autosplice} was source for:
+\begin{itemize}
+  \item{Authentic - real images}
+  \item{Forged\_JPEG90 - AI-manipulated images}
+\end{itemize}
+The focus of this particular dataset was on localized image manipulation and
+splicing operations that helped the model learn discontinuities introduced
+during selective image edition and region replacement.
+
+\subsubsection{CocoGlide}
+The CocoGlide dataset \cite{guillaro2023cocoglide} covered:
+\begin{itemize}
+  \item{Real - authentic images}
+  \item{Fake - inpainted images}
+\end{itemize}
+The AI-manipulated samples are generated using GLIDE's inpainting techniques,
+which was essential to the framework in teaching the model subtle boundary
+inconsistencies and abnormal texture transitions, created in the AI-assisted
+editing process.
+
+\subsubsection{SAGI}
+The SAGI dataset \cite{giakoumoglou2025sagi} contains subsets such as:
+\begin{itemize}
+  \item{original - authentic images}
+  \item{brushnet - inpainted images}
+  \item{controlnet - inpainted images}
+  \item{removeanything - inpainted images}
+\end{itemize}
+The RAISE split of the dataset was the only category used during training. SAGI
+introduced multiple modern inpainting approaches that contributed to the model's
+ability to generalize across different pipelines and editing strategies.
+
+\subsection{Processed Data} \label{subsection:processed}
+
+Once the datasets were acquired, preprocessing was performed before training the
+framework. The preprocessing pipeline included:
+\begin{enumerate}
+  \item{Image resizing and normalization}
+  \item{Extraction of spectral features using Discrete Cosine Transform (DCT)}
+  \item{Generation of monocular depth maps using MiDaS}
+  \item{Feature vector construction for hybrid fusion}
+\end{enumerate}
+
+The processed dataset was stored in separate train and test directories. Each
+sample contains a resized image file (.jpg), along with its corresponding
+extracted feature files (.npy).
+
+Most datasets were split using an 80-20 train-test ratio. The training split was
+further divided into 80\% training and 20\% validation during model training.
+
+\input{tables/label_stats}
+
+The files follow a consistent naming scheme:
+\verb|<label>_<original_file_name>|, where 0 indicates authentic images, 1
+stands for AI-generated images and 2 is the label for inpainted images as shown
+in table \ref{table:label_stats}. This preprocessing strategy essentially
+ensures efficiency in feature loading during model training and subsequently
+reduces repeated computation overhead.

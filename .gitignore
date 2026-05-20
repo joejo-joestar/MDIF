@@ -1,11 +1,23 @@
+# data directories
 data/raw/*
 data/processed/*
-__pycache__
-# weights/*.pth
-sample/*
-notebooks
-paper
 
-*.code-workspace
+# python etc
+__pycache__
+sample/*
+
+# other
+notebooks
 .claude
 .markdownlint.jsonc
+anti-poojinator-3000.code-workspace
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz

@@ -1,0 +1,87 @@
+% Experimental setup (H/w and S/w requirements). Evaluation metrics (including
+% equations and detailed metric descriptions). Experiments planned
+
+\subsection{Experimental Setup} \label{subsection:experimental_setup}
+
+The project is developed in Python and utilizes libraries mentioned in table
+\ref{table:software_dependencies} and implemented on a machine with the
+specifications shown in the table \ref{table:hardware_specs}.
+
+\input{tables/software_dependencies.tex}
+\input{tables/hardware_specs.tex}
+
+\subsection{Evaluation Metrics} \label{subsection:evaluation_metrics}
+
+The framework is evaluated on accuracy, area under the ROC curve,
+precision, recall, and F1-score metrics. This concept has achieved an
+accuracy of $92\%$ and an AUC of $0.98$ on the test set. The full detailed
+results of the metrics will be discussed in section \ref{section:results}.
+
+\subsubsection{Accuracy}
+\input{eqns/accuracy.tex}
+Where, $T_P$ stands for True Positives, $T_N$ for True Negatives, $F_P$ for
+False Positives and $F_N$ for False Negatives.
+Accuracy, as defined in Equation \ref{eqn:accuracy}, is the ratio of correctly
+classified instances, i.e. the sum of true positives ($T_P$) and true negatives
+($T_N$), to the total number of instances.
+\\
+\subsubsection{Area Under the ROC Curve}
+The Receiver Operating Characteristic (ROC) Curve is a visualization of the
+performance of a binary classifier across different thresholds.The Area Under
+the ROC Curve (AUC) is a metric that summarizes the overall performance of the
+classifier. An AUC of $1.0$ shows perfect classification, while an AUC of $0.5$
+shows random guessing. The AUC is calculated by integrating the area under the
+ROC curve, which plots the True Positive Rate ($T_PR$) against the False
+Positive Rate ($F_PR$) at various threshold settings. A higher AUC value
+indicates better model performance in distinguishing between the positive and
+negative classes. \\
+\subsubsection{Precision}
+Precision is the ratio of true positives to the sum of true and false
+positives, measuring the accuracy of the positive predictions made by
+the model, as shown in the equation
+\input{eqns/precision.tex}
+Where, $T_P$ stands for True Positives and $F_P$ for False Positives.
+A high precision is an indicator for a model that makes fewer false
+positive errors, meaning that when it predicts a positive class, it
+is likely to be correct.
+\\
+\subsubsection{Recall}
+Recall is that machine learning metric, evaluating a model's ability
+to find all relevant cases in a dataset, mathematically calculated as
+the ratio of true positives to the total number of actual positives,
+which is the sum of true positives and false negatives in the
+predictions. Recall is calculated using equation \ref{eqn:recall}
+\input{eqns/recall.tex}
+Where, $T_P$ stands for True Positives and $F_N$ for False Negatives.
+\\
+\subsubsection{F1-Score}
+That evaluation metric in machine learning defined as the harmonic
+mean of precision and recall is the F1 Score, combining both into a
+balanced score ranging from 0 to 1; 0 being the worst and 1 being the
+best. A higher F1 Score indicates a better performance. The formula
+for the F1 Score is mentioned in equation \ref{eqn:f1_score}
+\input{eqns/f1_score.tex}
+
+\subsubsection{Precision-Recall Curve}
+The Precision-Recall (PR) curve is a graphical evaluation metric
+which plots precision against recall across variable classification
+thresholds. PR curves are particularly used for imbalance datasets
+thanks to their focus on positive-class prediction quality over ROC
+curves. A better classification performance occurs when the PR has a
+larger area underneath the curve.
+
+\subsubsection{Macro Averaged Metrics}
+Macro averaging computes the metric independently for each class and
+then averages them equally, treating all classes equally regardless
+of the dataset size. It is represented by equation \ref{eqn:macro_avg}
+\input{eqns/macro_avg.tex}
+where $M_i$ is the metric value for each class.
+
+\subsubsection{Weighted Averaged Metrics}
+Weighted average deals with the average metric while taking into
+account the number of samples in each case and assigning varying
+levels of importance to data points or models, denoted by equation
+\ref{eqn:weighted_avg}
+\input{eqns/weighted_avg.tex}
+where $w_i$ is the class support and $M_i$ represents the metric value for
+each class.

@@ -1,0 +1,65 @@
+% Provide an overview of your research area. Ensure you have identified the
+% challenges in the existing solutions and the motivation for your work.
+% Motivation: Clearly state the motivation behind the work. Challenges: Outline
+% the challenges in the existing solution.
+
+% =========================================================================== %
+% --- Theory ---
+
+Recent developments in the world of Artificial Intelligence and its
+ability to generate almost undetectable images have taken over the
+world by storm, with every field relying on technology to make
+content easily and within minutes. When it comes to image generation,
+however, AI tools today can fabricate convincing forgeries for
+disinformation, ``deepfakes'', and fraud just as easily. Hence, the
+question, where do we draw the line on synthetic content?
+Traditionally, digital forensics has relied on detecting copy-move
+duplication, splicing composites and object removal, left spatial
+inconsistencies, using CNN architectures, but now diffusion models
+like Stable Diffusion and DALL·E produce globally synthetic images
+indistinguishable to the human eye which poses a problem.
+
+On March 23, 2023, certain images were leaked of American President
+Donald Trump and Russian President Vladimir Putin getting tackled by
+police officers \cite{klepper2023deepfake}. While the images become
+widely sensational, they were AI generated and such situations invoke
+mistrust in people unable to identify what is real and what is not.
+Along with image generation, AI-powered inpainting, which is the
+selective modification of authentic photographs, has become
+accessible to all and hugely popular, with Adobe Photoshop's
+Generative Fill and Google's Gemini and many other such tools.
+The consequence of undetected image forgeries is a matter of serious
+concern, where political misinformation, manipulated imagery in civil
+disputes and even faked identity documents can cause heavy harm and
+damage to reputation.
+
+Existing detection models, even state-of-the-art systems like
+FatFormer, GRAMNet, and DiffCoR, face two critical limitations: they
+generalize poorly to generator models not seen during training and
+several require significant computational resources unavailable in
+resource-constrained environments. A computationally efficient,
+generalizable, and inpainting-aware detector is therefore a pressing
+requirement.
+
+% =========================================================================== %
+% --- Problem Statement ---
+
+AI-generated and AI-manipulated (inpainted) images that are produced
+by diffusion-based generative models must be reliably detected by a
+system with good accuracy and domain generalization capability. The
+system must be able to classify images into three broad categories:
+not AI-generated, AI-generated, or AI-manipulated. The detection must
+be robust to image post-processing operations like compression or
+resizing, and able to identify AI-generated images across different
+generation architectures.
+
+Current AI image generators are too powerful, and people cannot
+distinguish between what is real and what has been generated. There
+is a need to make detection automatic and algorithm-driven in this
+scenario. Failure to detect such forgeries will have bearing
+consequences in the fields of news and journalism, legal junctures,
+fraud and crime prevention, social media integrity and many other
+relevant spheres of life. The gap in the detection of inpainted
+images is especially worrisome as bad actors can manipulate select
+regions of an image to their liking while also being able to pass
+them as credible against traditional verification algorithms.

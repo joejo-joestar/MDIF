@@ -1,0 +1,58 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "*.aux": true,
+      "*.bbl": true,
+      "*.blg": true,
+      "*.fdb_latexmk": true,
+      "*.fls": true,
+      "*.log": false,
+      "*.out": true,
+      "*.synctex.gz": true,
+      "*.synctex(busy)": true,
+    },
+    "workbench.colorTheme": "Catppuccin Frappé",
+    "latex-workshop.formatting.latex": "tex-fmt",
+    "latex-workshop.format.fixMath.enabled": false,
+    "latex-workshop.format.fixQuotes.enabled": true,
+    "rewrap.autoWrap.enabled": false,
+    "rewrap.wrappingColumn": 80,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "spellright.ignoreFiles": [
+      "**/.git",
+      "**/.svn",
+      "**/.hg",
+      "**/.DS_Store",
+      "**/Thumbs.db",
+      "*.aux",
+      "*.bbl",
+      "*.blg",
+      "*.fdb_latexmk",
+      "*.fls",
+      "*.log",
+      "*.out",
+      "*.synctex.gz",
+      "*.synctex(busy)",
+    ],
+  },
+  "extensions": {
+    "recommendations": [
+      "james-yu.latex-workshop",
+      "tecosaur.latex-utilities",
+      "dnut.rewrap-revived",
+      "wayou.vscode-todo-highlight",
+      "ban.spellright",
+    ]
+  }
+}
