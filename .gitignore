@@ -4,9 +4,9 @@ data/processed/*
 
 # python etc
 __pycache__
-sample/*
 
 # other
+sample/*
 notebooks
 .claude
 .markdownlint.jsonc

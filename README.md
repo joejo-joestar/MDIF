@@ -1,20 +1,20 @@
 <h1 align="center">🖼️ MDIF: A Multi-Domain Inconsistency Framework for Image Forgery Detection</h1>
 
 <p align="center">
-    <img src="" alt="Image Proc" title="Image Proc" width="128" >
+    <img src="" alt="Image Proc" title="Image Proc" width="128"></img>
 </p>
 
 ---
 
 ## Paper
 
-The paper describing the MDIF framework is available [here](./paper/paper.pdf).
+The paper describing MDIF is available in the [`paper`](./paper/paper.pdf) directory.
 
 ---
 
 ## Architecture
 
-The MDIF Framework is uh... yea... :pray:
+The architecture for MDIF is shown in the below flowchart
 
 ```mermaid
 flowchart LR
@@ -137,7 +137,7 @@ This work is builds on and uses Intel ISL's [MiDaS](https://pytorch.org/hub/inte
 
 The framework has been fine-tuned and trained on the [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main), [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images), [CocoGlide](https://github.com/grip-unina/TruFor), and [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage) datasets.
 
-The sample images [`sample/real_flower2`](sample/real_flower2.jpg) and [`sample/real_cat`](sample/real_cat.jpg) are Photos by [joejo joestar](https://unsplash.com/@joejojoestar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/3qg-RiNOnHQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) and the [`sample/gen_nanoban_flower`](sample/gen_nanoban_flower.jpg) and [`sample/gen_nanoban_cat`](sample/gen_nanoban_cat.jpg) are generated using [Google's Nano Banana (Gemini 2.5 Flash Image)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image)
+The sample image [`sample/flower_real`](sample/flower_real.jpg) is a photo by [joejo joestar](https://unsplash.com/@joejojoestar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/3qg-RiNOnHQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) and the [`sample/flower_gen`](sample/flower_gen.jpg) was generated using [Google's Nano Banana (Gemini 2.5 Flash Image)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image)
 
 >[!NOTE]
 > This repo also includes the [`isl-org/MIDAS`](https://github.com/isl-org/MIDAS) repository to help speed up the deployed streamlit app!

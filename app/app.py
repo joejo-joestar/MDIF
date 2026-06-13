@@ -21,6 +21,18 @@ def get_models():
 models = get_models()
 
 uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png", "webp"])
+# examples
+examples = {
+    "Real Flower": "./sample/flower_real.jpg",
+    "Generated Flower": "./sample/flower_gen.jpg",
+    "Real Classroom": "./sample/class_real.jpeg",
+    "Inpainted Classroom": "./sample/class_inpainted.jpeg",
+}
+
+with st.container(width="stretch", horizontal=True):
+    for label, example in examples.items():
+        if st.button(f"{label}", key=label):
+            uploaded = example
 
 if uploaded is not None:
     image = Image.open(uploaded)
@@ -37,7 +49,7 @@ if uploaded is not None:
             """,
             width="stretch"
         )
-        st.image(image, caption=uploaded.name)
+        st.image(image)
 
     with col_results:
         with st.spinner("Analysing..."):
