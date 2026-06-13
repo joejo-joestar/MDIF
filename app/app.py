@@ -8,7 +8,7 @@ from PIL import Image
 
 from mdif.inference import load_models, analyze_image
 
-st.set_page_config(page_title="MDIF", page_icon=":guardsman:", layout="wide")
+st.set_page_config(page_title="MDIF", page_icon="assets/pixpics.png", layout="wide")
 
 st.title(":primary[MDIF]", text_alignment="center")
 st.caption("A Multi-Domain Inconsistency Framework proposed for our Image Processing course (CS F311).", text_alignment="center")
@@ -21,6 +21,7 @@ def get_models():
 models = get_models()
 
 uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png", "webp"])
+
 # examples
 examples = {
     "Real Flower": "./sample/flower_real.jpg",
@@ -28,7 +29,6 @@ examples = {
     "Real Classroom": "./sample/class_real.jpeg",
     "Inpainted Classroom": "./sample/class_inpainted.jpeg",
 }
-
 with st.container(width="stretch", horizontal=True):
     for label, example in examples.items():
         if st.button(f"{label}", key=label):

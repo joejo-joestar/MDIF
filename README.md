@@ -1,7 +1,7 @@
 <h1 align="center">🖼️ MDIF: A Multi-Domain Inconsistency Framework for Image Forgery Detection</h1>
 
 <p align="center">
-    <img src="" alt="Image Proc" title="Image Proc" width="128"></img>
+    <img src="assets/pixpics.png" alt="Image Proc" title="Image Proc" width="128"></img>
 </p>
 
 ---
