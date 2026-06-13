@@ -24,10 +24,10 @@ uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png", "webp
 
 # examples
 examples = {
-    "Real Flower": "sample/flower_real.jpg",
-    "Generated Flower": "sample/flower_gen.jpg",
-    "Real Classroom": "sample/class_real.jpeg",
-    "Inpainted Classroom": "sample/class_inpainted.jpeg",
+    "Real Flower": "app/sample/flower_real.jpg",
+    "Generated Flower": "app/sample/flower_gen.jpg",
+    "Real Classroom": "app/sample/class_real.jpeg",
+    "Inpainted Classroom": "app/sample/class_inpainted.jpeg",
 }
 with st.container(width="stretch", horizontal=True):
     for label, example in examples.items():

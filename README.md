@@ -137,7 +137,7 @@ This work is builds on and uses Intel ISL's [MiDaS](https://pytorch.org/hub/inte
 
 The framework has been fine-tuned and trained on the [AutoSplice](https://github.com/shanface33/AutoSplice_Dataset/tree/main), [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images), [CocoGlide](https://github.com/grip-unina/TruFor), and [Unbiased Tiny GenImage](https://www.kaggle.com/datasets/cartografia/unbiased-tiny-genimage) datasets.
 
-The sample image [`sample/flower_real`](sample/flower_real.jpg) is a photo by [joejo joestar](https://unsplash.com/@joejojoestar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/3qg-RiNOnHQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) and the [`sample/flower_gen`](sample/flower_gen.jpg) was generated using [Google's Nano Banana (Gemini 2.5 Flash Image)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image)
+The sample image [`app/sample/flower_real`](app/sample/flower_real.jpg) is a photo by [joejo joestar](https://unsplash.com/@joejojoestar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/3qg-RiNOnHQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) and the [`app/sample/flower_gen`](app/sample/flower_gen.jpg) was generated using [Google's Nano Banana (Gemini 2.5 Flash Image)](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image)
 
 >[!NOTE]
 > This repo also includes the [`isl-org/MIDAS`](https://github.com/isl-org/MIDAS) repository to help speed up the deployed streamlit app!
